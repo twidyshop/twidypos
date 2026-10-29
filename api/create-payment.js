@@ -9,7 +9,8 @@ const env = () => ({
   url: (process.env.SUPABASE_URL || 'https://qnlrsgvmwgpwqgfoabcz.supabase.co').replace(/\/$/, ''),
   anon: process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY,
   service: process.env.SUPABASE_SERVICE_ROLE_KEY,
-  midtrans: process.env.MIDTRANS_SERVER_KEY,\n  clientKey: process.env.MIDTRANS_CLIENT_KEY,
+  midtrans: process.env.MIDTRANS_SERVER_KEY,
+  clientKey: process.env.MIDTRANS_CLIENT_KEY,
   production: process.env.MIDTRANS_IS_PRODUCTION === 'true',
   base: (process.env.APP_BASE_URL || (process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'https://twidypos.vercel.app')).replace(/\/$/, '')
 });
