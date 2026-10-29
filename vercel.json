@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/paket",
+      "destination": "/paket.html"
+    },
+    {
+      "source": "/paket/",
+      "destination": "/paket.html"
+    },
+    {
       "source": "/panel",
       "destination": "/panel.html"
     },
