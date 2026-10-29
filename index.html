@@ -244,7 +244,37 @@
   .poslayout>.cart.expanded .summary{flex:0 0 auto!important;background:#fff!important}
   .poslayout>.cart .carttoggle{font-weight:800}
 }
-\n</style><link rel="stylesheet" href="/landing-premium.css">
+\n
+/* Mobile cart checkout visibility fix */
+@media(max-width:760px){
+  .poslayout>.cart.expanded{
+    max-height:calc(100dvh - 112px - env(safe-area-inset-bottom))!important;
+    height:auto!important;
+  }
+  .poslayout>.cart.expanded .cartbody{
+    min-height:0!important;overflow:hidden!important;
+  }
+  .poslayout>.cart.expanded .cartitems{
+    flex:1 1 auto!important;min-height:0!important;
+    max-height:none!important;overflow-y:auto!important;
+  }
+  .poslayout>.cart.expanded .summary{
+    flex:0 0 auto!important;max-height:48dvh!important;
+    overflow-y:auto!important;padding-bottom:calc(12px + env(safe-area-inset-bottom))!important;
+  }
+  .poslayout>.cart.expanded .paybtn{
+    display:block!important;position:sticky!important;bottom:0!important;
+    z-index:3!important;width:100%!important;min-height:46px!important;
+    margin-top:10px!important;background:var(--p)!important;color:#fff!important;
+    box-shadow:0 -5px 12px #ffffffd9!important;
+  }
+}
+@media(max-width:390px){
+  .poslayout>.cart.expanded{max-height:calc(100dvh - 92px - env(safe-area-inset-bottom))!important}
+  .poslayout>.cart.expanded .summary{max-height:50dvh!important}
+}
+
+</style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
 <section class="lhero"><div><span class="lpill">✦ APLIKASI KASIR PRAKTIS UNTUK USAHA</span><h1>Jalankan tokomu lebih <em>rapi</em>, setiap hari.</h1><p>Catat penjualan, kelola produk dan stok, pantau riwayat transaksi, serta lihat laporan usaha dalam satu dashboard yang simpel.</p><div class="lheroBtns"><button class="lbtn primary" type="button" data-open-auth>Mulai Gratis&nbsp; →</button><a class="lbtn" href="#fitur">Kenali Fitur</a></div><div class="ltrust"><span>Kasir & transaksi</span><span>Stok produk</span><span>Laporan penjualan</span></div></div>
