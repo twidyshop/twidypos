@@ -393,12 +393,12 @@ function renderPeriodComparisons(){
  const prevStart=new Date(now.getFullYear(),now.getMonth()-1,1);
  const sumFor=fn=>{const rows=db.transactions.filter(t=>fn(new Date(t.createdAt)));return {revenue:rows.reduce((n,t)=>n+Number(t.total||0),0),count:rows.length,units:rows.reduce((n,t)=>n+(t.items||[]).reduce((a,i)=>a+Number(i.qty||0),0),0)}};
  const today=sumFor(d=>day(d)===todayKey),yday=sumFor(d=>day(d)===yesterdayKey);
- const thisMonth=sumFor(d=>monthKey(d)===monthKey(now)),lastMonth=sumFor(d=>monthKey(d)===monthKey(prevStart));
+ const thisMonth=sumFor(d=>monthKey(d)===monthKey(now)),lastMonth=sumFor(d=>monthKey(d)===monthKey(prevStart)&&d.getDate()<=Math.min(now.getDate(),new Date(now.getFullYear(),now.getMonth(),0).getDate()));
  const paint=(prefix,current,previous)=>{
   const pct=$(prefix+'Pct'),detail=$(prefix+'Detail'),count=$(prefix+'Count');if(!pct||!detail||!count)return;
-  const delta=current.revenue-previous.revenue;let cls='flat',label='0,0%';if(previous.revenue>0){const p=delta/previous.revenue*100;label=(p>0?'+':'')+p.toLocaleString('id-ID',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';cls=p>0?'up':p<0?'down':'flat'}else if(current.revenue>0){label='Baru';cls='up'}
+  const delta=current.revenue-previous.revenue;let cls='flat',label='—';if(previous.revenue>0){const p=delta/previous.revenue*100;label=(p>0?'+':'')+p.toLocaleString('id-ID',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';cls=p>0?'up':p<0?'down':'flat'}else if(current.revenue===0){label='0,0%'}
   pct.className='comparison-main '+cls;pct.textContent=label;
-  detail.textContent=(delta>0?'Naik ':delta<0?'Turun ':'Selisih ')+rp(Math.abs(delta))+' omzet';
+  detail.textContent=previous.revenue>0?((delta>0?'Naik ':delta<0?'Turun ':'Tidak berubah ')+rp(Math.abs(delta))+' omzet'):'Belum ada omzet pada periode pembanding; persentase belum tersedia.';
   count.textContent='Transaksi: '+current.count+' vs '+previous.count+' ('+(current.count-previous.count>0?'+':'')+(current.count-previous.count)+') · Unit: '+current.units+' vs '+previous.units;
  };
  paint('compareDay',today,yday);paint('compareMonth',thisMonth,lastMonth);
