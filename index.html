@@ -67,6 +67,73 @@
 @media(min-width:761px){.side.open:before{display:none}}
 @media(prefers-reduced-motion:reduce){.side{transition:none!important}}
 
+
+/* Fix POS mobile cart: never float over or obscure the product catalog */
+@media(max-width:760px){
+  .cart{
+    position:sticky!important;
+    inset:auto!important;
+    z-index:5!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    width:100%!important;max-width:none!important;
+    margin:16px 0 10px!important;
+    transform:none!important;
+    background:#fff!important;
+    color:var(--ink)!important;
+    border:1px solid var(--line)!important;
+    border-radius:16px!important;
+    box-shadow:0 5px 20px #20243a0b!important;
+    overflow:visible!important;
+  }
+  .cart:not(.expanded) .carthead{
+    min-height:58px;padding:10px 12px!important;
+    background:#fff!important;border:0!important;border-radius:16px;
+  }
+  .cart:not(.expanded) .carthead>div:before{
+    content:"🛒";width:36px;height:36px;border-radius:11px;
+    background:#f0edff;color:#6043d8;
+  }
+  .cart:not(.expanded) .carthead h3{color:var(--ink)!important}
+  .cart:not(.expanded) #cartCount{background:#f0edff!important;color:#6043d8!important}
+  .carttoggle{background:#6043d8!important;color:#fff!important;border-color:#6043d8!important}
+  .cart.expanded{
+    position:static!important;inset:auto!important;
+    display:block!important;max-height:none!important;
+    height:auto!important;overflow:visible!important;
+    background:#fff!important;color:var(--ink)!important;
+    margin-top:14px!important;
+  }
+  .cart.expanded .carthead{
+    background:#fff!important;color:var(--ink)!important;
+    border-bottom:1px solid var(--line)!important;
+    border-radius:16px 16px 0 0;
+  }
+  .cart.expanded .carthead h3{color:var(--ink)!important}
+  .cart.expanded #cartCount{background:#f0edff!important;color:#6043d8!important}
+  .cart.expanded .cartbody{display:block!important;overflow:visible!important;min-height:0!important}
+  .cart.expanded .cartitems{
+    display:block!important;max-height:260px!important;min-height:55px!important;
+    overflow:auto!important;padding:10px 14px!important;
+  }
+  .cart.expanded .cartitem{border-color:var(--line)!important}
+  .cart.expanded .cartinfo b{color:var(--ink)!important}
+  .cart.expanded .cartinfo small{color:var(--mut)!important}
+  .cart.expanded .qty button{background:#f3f2f8!important;color:var(--ink)!important}
+  .cart.expanded .summary{
+    display:block!important;position:static!important;max-height:none!important;
+    overflow:visible!important;flex:none!important;
+    background:#faf9ff!important;color:var(--ink)!important;
+    border-top:1px solid var(--line);border-radius:0 0 16px 16px;
+    padding:12px 14px!important;
+  }
+  .cart.expanded .sumrow{color:var(--mut)!important}
+  .cart.expanded .sumrow strong,.cart.expanded .sumrow.total{color:var(--ink)!important}
+  .cart.expanded .paybtn{min-height:46px;border-radius:12px}
+  .poslayout{overflow:visible!important}
+  .poslayout>.cart{order:2}
+  .content{padding-bottom:24px!important}
+}
+
 /* Mobile app layout refinement: calmer header and non-obstructive POS sheet */
 @media(max-width:760px){
   .top{height:auto;min-height:62px;padding:10px 12px;gap:8px;align-items:center}
