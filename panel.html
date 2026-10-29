@@ -18,9 +18,9 @@
   <div class="brand" style="padding:0;color:var(--ink)"><div class="brand-icon">T</div><div><strong>TWIDYPOS</strong><small style="color:var(--muted)">OWNER CONSOLE</small></div></div>
   <h1>Panel pemilik</h1><p>Masuk menggunakan akun pemilik TWIDYPOS yang terdaftar. Panel ini terpisah dari dashboard kasir.</p>
   <form id="loginForm"><label for="email">Email pemilik</label><input id="email" type="email" autocomplete="username" required value="3twidy@gmail.com"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="primary" id="loginBtn">Masuk ke Owner Panel</button></form>
-  <button id="googleBtn" class="secondary">Lanjutkan dengan Google</button>
+  <button id="googleBtn" class="secondary">Lanjutkan dengan Google</button><button id="signupBtn" class="secondary" type="button">Belum punya akun? Daftar akun pemilik</button>
   <div id="loginError" class="error hidden" style="margin-top:14px"></div>
-  <p class="loginhint">Akses diverifikasi oleh fungsi database, bukan hanya tampilan browser. Jangan bagikan password atau kode OTP.</p>
+  <p id="signupHint" class="loginhint">Akses diverifikasi oleh fungsi database, bukan hanya tampilan browser. Jangan bagikan password atau kode OTP.</p>
   <div class="foot">TWIDYPOS · Owner access only</div>
  </div>
 </div>
@@ -94,6 +94,7 @@ function showApp(email){$('loginView').classList.add('hidden');$('appView').clas
 async function checkSession(){const {data,error}=await sb.auth.getSession();if(error){showLogin(error.message);return}if(data.session){showApp(data.session.user.email)}else showLogin()}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginBtn').disabled=true;$('loginBtn').textContent='Memverifikasi…';try{const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;const {data:probe,error:rpcError}=await sb.rpc('twidypos_owner_dashboard');if(rpcError){await sb.auth.signOut();throw rpcError}showApp(data?.user?.email||$('email').value.trim())}catch(err){showLogin(err.message||'Login gagal. Pastikan akun terdaftar dan punya hak owner.')}finally{$('loginBtn').disabled=false;$('loginBtn').textContent='Masuk ke Owner Panel'}});
 $('googleBtn').addEventListener('click',async()=>{const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/panel'}});if(error)showLogin(error.message)});
+$('signupBtn').addEventListener('click',async()=>{const email=$('email').value.trim().toLowerCase(),password=$('password').value;if(email!=='3twidy@gmail.com'){showLogin('Pendaftaran owner hanya diizinkan untuk email pemilik yang sudah ditetapkan.');return}if(!password||password.length<8){showLogin('Buat password minimal 8 karakter.');return}const btn=$('signupBtn');btn.disabled=true;btn.textContent='Mendaftarkan…';try{const {data,error}=await sb.auth.signUp({email,password,options:{emailRedirectTo:location.origin+'/panel'}});if(error)throw error;if(data.session){const {error:rpcError}=await sb.rpc('twidypos_owner_dashboard');if(rpcError){await sb.auth.signOut();throw rpcError}showApp(email)}else{showLogin('Permintaan pendaftaran dikirim. Buka email pemilik dan konfirmasi tautan dari Supabase, lalu masuk di sini. Jika email tidak datang, cek folder spam dan pengaturan SMTP.')}}catch(err){showLogin(err.message||'Pendaftaran akun gagal.')}finally{btn.disabled=false;btn.textContent='Belum punya akun? Daftar akun pemilik'}});
 $('logoutBtn').addEventListener('click',async()=>{await sb.auth.signOut();dashboard=null;showLogin()});
 $('refreshBtn').addEventListener('click',loadDashboard);
 sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT')showLogin();else if(event==='SIGNED_IN'&&session){$('ownerEmail').textContent=session.user.email||'Owner';loadDashboard()}});
