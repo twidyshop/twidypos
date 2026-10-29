@@ -66,6 +66,68 @@
 }
 @media(min-width:761px){.side.open:before{display:none}}
 @media(prefers-reduced-motion:reduce){.side{transition:none!important}}
+
+/* Mobile app layout refinement: calmer header and non-obstructive POS sheet */
+@media(max-width:760px){
+  .top{height:auto;min-height:62px;padding:10px 12px;gap:8px;align-items:center}
+  .top>div:first-child{gap:9px!important;min-width:0;flex:1}
+  .top h1{font-size:15px;line-height:1.25;letter-spacing:-.35px}
+  .top p{font-size:10px;line-height:1.3;margin-top:3px;max-width:42vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topright{gap:5px;flex-shrink:0}
+  .topright #switchCashierBtn,.topright #exportBtn{display:none!important}
+  .topright .logoutbtn{padding:8px 9px!important;font-size:10px!important;border-radius:10px!important}
+  .topright .avatar{width:32px;height:32px;border-radius:10px;font-size:12px}
+  .mobilemenu{width:38px;height:38px;border-radius:11px}
+  .content{padding:15px 12px 110px}
+  .welcome{align-items:flex-start;gap:10px;margin-bottom:17px}
+  .welcome h2{font-size:18px;line-height:1.25}
+  .welcome p{line-height:1.5}
+  .welcome .btn{flex-shrink:0;max-width:132px;white-space:normal;line-height:1.3}
+  .sectionhead{gap:10px;margin-bottom:15px}
+  .sectionhead>div{min-width:0}
+  .sectionhead h2{font-size:18px;line-height:1.3}
+  .sectionhead p{line-height:1.5}
+  .stats{gap:9px;margin-bottom:13px}
+  .stat{padding:12px;border-radius:13px}
+  .stathead{font-size:10px;gap:5px}
+  .staticon{width:28px;height:28px;flex-shrink:0}
+  .value{font-size:19px;margin:10px 0 4px;overflow-wrap:anywhere}
+  .hint{font-size:9px;line-height:1.45}
+  .panel{border-radius:14px}
+  .panelhead{padding:14px}
+  .panelbody{padding:14px}
+  .poslayout{gap:12px}
+  .poslayout>div:first-child{min-width:0;width:100%}
+  .toolbar{gap:7px;margin-bottom:9px}
+  .toolbar .search{min-width:0}
+  #posSort{max-width:120px;font-size:12px!important;padding:10px 7px}
+  .cats{padding-bottom:10px}
+  .prodgrid{gap:8px}
+  .prodcard{padding:8px;border-radius:12px}
+  .prodart{height:88px;margin-bottom:8px}
+  .prodcard>b{font-size:11px;line-height:1.35}
+  .prodcard small{font-size:9px}
+  .prodbottom{margin-top:9px;gap:5px}
+  .prodbottom strong{font-size:11px}
+  .plus{width:25px;height:25px;flex-shrink:0}
+  /* Cart remains a compact bottom bar; expanded sheet is isolated to POS and can be closed. */
+  .cart{left:9px;right:9px;bottom:calc(8px + env(safe-area-inset-bottom));width:auto;max-width:600px}
+  .cart:not(.expanded){min-height:60px}
+  .cart.expanded{max-height:min(68dvh,620px);bottom:calc(8px + env(safe-area-inset-bottom));}
+  .cart.expanded .cartbody{min-height:0}
+  .cart.expanded .cartitems{min-height:45px}
+  .cart.expanded .summary{max-height:48dvh}
+  body:has(.side.open){overflow:hidden}
+}
+@media(max-width:390px){
+ .top p{max-width:35vw}
+ .topright .logoutbtn{font-size:9px!important;padding:7px 8px!important}
+ .welcome{flex-direction:column}
+ .welcome .btn{max-width:none}
+ .prodart{height:76px}
+ .value{font-size:17px}
+}
+
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
@@ -123,7 +185,7 @@ supabaseClient.auth.getSession().then(()=>{if(!cloudReady&&!activationInProgress
 let db=load(),cart={},cat='Semua',method='Tunai',timer;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){toast('Penyimpanan penuh, unduh cadangan data.')}if(cloudReady&&cloudUser&&activeCashier&&cashierSessionToken){clearTimeout(cloudTimer);const ownerId=cloudUser.id,snapshot=JSON.parse(JSON.stringify(db)),token=cashierSessionToken;cloudTimer=setTimeout(async()=>{if(!cloudReady||!cloudUser||cloudUser.id!==ownerId||token!==cashierSessionToken)return;const {error}=await supabaseClient.rpc('save_workspace_as_cashier',{p_store_data:snapshot,p_session_token:token});if(error){console.error('Verified cloud save failed',error);toast('GAGAL SINKRON: '+(error.message||'sesi kasir perlu login ulang')+'. Data lokal masih tersimpan.');return}await loadStockMovements(false)},350)}else if(cloudReady){toast('Login kasir diperlukan untuk sinkronisasi.')}}
 function productVisual(p){let u=String(p&&p.imageUrl||'').trim();if(u.startsWith('https://')||u.startsWith('http://')||u.startsWith('data:image/png;base64,')||u.startsWith('data:image/jpeg;base64,')||u.startsWith('data:image/webp;base64,')||u.startsWith('data:image/gif;base64,'))return '<img src="'+esc(u)+'" alt="'+esc(p&&p.name||'Foto produk')+'" loading="lazy" onerror="this.remove()">';return '<span style="display:grid;width:100%;height:100%;place-items:center;font-size:34px;background:#f4f4f7">'+esc(p&&p.emoji||'📦')+'</span>'}function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(timer);timer=setTimeout(()=>$('toast').classList.remove('show'),2500)}
-function go(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===v));let m={dashboard:['Dashboard','Ringkasan bisnis hari ini'],kasir:['Kasir / POS','Penjualan cepat dan praktis'],produk:['Produk & Stok','Katalog inventaris toko'],transaksi:['Riwayat Transaksi','Semua struk yang tersimpan'],laporan:['Laporan Penjualan','Analitik performa toko'],pengaturan:['Pengaturan Toko','Identitas dan preferensi kasir'],stoklog:['Riwayat Perubahan Stok','Audit stok dan ekspor Excel']}[v];$('topTitle').textContent=m[0];$('topSub').textContent=m[1];closeMobileMenu();render()}
+function go(v){const cartPanel=document.querySelector('.cart');if(cartPanel){cartPanel.classList.remove('expanded');const cartToggle=document.getElementById('cartToggle');if(cartToggle){cartToggle.setAttribute('aria-expanded','false');cartToggle.textContent='⌄ Buka keranjang'}}document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===v));let m={dashboard:['Dashboard','Ringkasan bisnis hari ini'],kasir:['Kasir / POS','Penjualan cepat dan praktis'],produk:['Produk & Stok','Katalog inventaris toko'],transaksi:['Riwayat Transaksi','Semua struk yang tersimpan'],laporan:['Laporan Penjualan','Analitik performa toko'],pengaturan:['Pengaturan Toko','Identitas dan preferensi kasir'],stoklog:['Riwayat Perubahan Stok','Audit stok dan ekspor Excel']}[v];$('topTitle').textContent=m[0];$('topSub').textContent=m[1];closeMobileMenu();render()}
 window.go=go;document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>go(b.dataset.view));const sideMenu=$('side'),menuButton=$('menuBtn');function closeMobileMenu(){sideMenu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}menuButton.setAttribute('aria-controls','side');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Buka menu navigasi');menuButton.onclick=e=>{e.stopPropagation();const opened=sideMenu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(opened))};document.addEventListener('pointerdown',e=>{if(sideMenu.classList.contains('open')&&!sideMenu.contains(e.target)&&!menuButton.contains(e.target))closeMobileMenu()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu()});$('todayDate').textContent=new Date().toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
 function txToday(){return db.transactions.filter(t=>day(t.createdAt)===day(new Date()))}function lines(){return Object.entries(cart).map(([id,v])=>{let p=db.products.find(x=>x.id===id);return p?{...p,qty:v.qty}:null}).filter(Boolean)}function calc(){let sub=lines().reduce((s,p)=>s+p.price*p.qty,0),raw=Math.max(0,Number($('discountInput').value)||0),typ=$('discountType')?.value||'amount',discount=Math.min(sub,typ==='percent'?sub*Math.min(100,raw)/100:raw),rounded=Math.round(discount),tax=Math.round((sub-rounded)*(Number(db.settings.taxRate)||0)/100);return{sub,discount:rounded,discountInput:raw,discountType:typ,tax,total:sub-rounded+tax}}
 function chart(id,ds){let max=Math.max(1,...ds.map(x=>x.value));$(id).innerHTML=ds.map((d,i)=>'<div class="barwrap"><div class="bar '+(i===ds.length-1?'today':'')+'" title="'+rp(d.value)+'" style="height:'+Math.max(d.value?5:2,d.value/max*78)+'%"></div><span class="barlabel">'+d.label+'</span></div>').join('')}
