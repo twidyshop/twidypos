@@ -37,6 +37,31 @@ module.exports = async (req, res) => {
   const user = await userResponse.json();
   const plan = PLANS[req.body && req.body.plan_code];
   if (!plan || !user.id || !user.email) return res.status(400).json({ error: 'Paket atau akun tidak valid.' });
+  // Server-side entitlement check: the browser cannot purchase a package already active on this account.
+  let usageResponse, usage;
+  try {
+    usageResponse = await fetch(e.url + '/rest/v1/rpc/twidypos_get_my_plan_usage', {
+      method: 'POST',
+      headers: { apikey: e.anon, authorization: auth, 'content-type': 'application/json' },
+      body: '{}'
+    });
+    usage = await usageResponse.json();
+  } catch {
+    return res.status(503).json({ error: 'Status paket akun belum dapat diverifikasi. Coba lagi nanti.' });
+  }
+  if (!usageResponse.ok || !usage || typeof usage.plan_code !== 'string') {
+    return res.status(503).json({ error: 'Status paket akun belum dapat diverifikasi. Pembayaran tidak dibuat.' });
+  }
+  const activePlan = usage.plan_code.toLowerCase();
+  if (activePlan === 'unlimited') {
+    return res.status(409).json({ error: 'Akun ini sudah memiliki Full Unlimited. Paket berbayar tidak perlu dibeli lagi.' });
+  }
+  if (activePlan === req.body.plan_code) {
+    return res.status(409).json({ error: 'Paket ' + (activePlan === 'premium' ? 'Premium' : 'Free') + ' sudah aktif di akun ini. Pilih paket lain jika ingin upgrade.' });
+  }
+  if (activePlan !== 'free' && activePlan !== 'premium') {
+    return res.status(409).json({ error: 'Paket akun tidak dikenali. Pembayaran tidak dibuat demi keamanan.' });
+  }
   const orderId = 'TWP-' + Date.now() + '-' + randomBytes(6).toString('hex');
   const apiBase = e.production ? 'https://app.midtrans.com' : 'https://app.sandbox.midtrans.com';
   const notificationUrl = e.base + '/api/midtrans-webhook';
