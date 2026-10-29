@@ -2,9 +2,9 @@
 
 ## Paket
 - Free: maksimal 50 transaksi per hari dan 50 produk.
-- Premium: Rp15.000 untuk 30 hari, maksimal 500 transaksi per hari dan 200 produk.
-- Full Unlimited: Rp25.000 untuk 30 hari, tanpa batas produk/transaksi.
-- Tidak ada perpanjangan otomatis. Pengguna membeli lagi setelah masa aktif habis.
+- Premium: Rp15.000 sekali bayar untuk akses lifetime, maksimal 500 transaksi per hari dan 200 produk.
+- Full Unlimited: Rp25.000 sekali bayar untuk akses lifetime, tanpa batas produk/transaksi.
+- Tidak ada masa kedaluwarsa paket berbayar dan tidak ada perpanjangan otomatis. Pembelian satu kali memberi akses lifetime.
 - Akun yang dibuat sebelum waktu rollout yang dicatat di `private.twidypos_plan_rollout` tetap unlimited.
 
 ## Environment Variables di Vercel
@@ -35,7 +35,7 @@ Setelah menyimpan environment variables, **redeploy** project Vercel agar fungsi
 - Server memverifikasi sesi pengguna saat membuat pesanan.
 - Webhook memvalidasi signature SHA-512 Midtrans, ID pesanan yang dibuat server, nominal, status kode, dan mata uang.
 - Callback sukses di browser tidak mengaktifkan paket. Aktivasi hanya melalui webhook server yang valid.
-- Pesanan berlaku 30 menit; langganan aktif selama 30 hari sejak pembayaran valid.
+- Pesanan pembayaran berlaku 30 menit. Setelah pembayaran terverifikasi, Premium atau Full Unlimited aktif secara lifetime (`current_period_end = null`).
 - Simpan Server Key dan Supabase Service Role Key sebagai secret. Jika keduanya pernah masuk GitHub atau chat publik, rotasi segera.
 
 ## Catatan verifikasi
