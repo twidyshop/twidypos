@@ -73,7 +73,8 @@ function row(t){return '<tr><td><b>'+esc(t.id)+'</b></td><td>'+esc(dt(t.createdA
 function inRange(t,from,to){const d=day(t.createdAt);return(!from||d>=from)&&(!to||d<=to)}function reportTransactions(){return db.transactions.filter(t=>inRange(t,$('reportDateFrom').value,$('reportDateTo').value))}
 let stockMovementCache=[];
 function stockMovementLabel(x){return ({sale:'Penjualan',stock_in:'Stok masuk',stock_out:'Stok keluar',adjustment:'Penyesuaian stok',product_deleted:'Produk dihapus'})[x]||x}
-async function recordStockMovement(){return true /* Riwayat dibuat atomik oleh RPC database saat data disimpan. */}\nasync function loadStockMovements(showMessage=true){
+async function recordStockMovement(){return true /* Riwayat dibuat atomik oleh RPC database saat data disimpan. */}
+async function loadStockMovements(showMessage=true){
  if(!cloudReady||!cloudUser){stockMovementCache=[];$('stockLogRows').innerHTML='<tr><td colspan="8" class="empty">Masuk ke akun toko untuk melihat riwayat database.</td></tr>';$('stockLogCaption').textContent='Belum terhubung ke database';return}
  $('stockLogRows').innerHTML='<tr><td colspan="8" class="empty">Memuat riwayat…</td></tr>';
  let q=supabaseClient.from('pos_stock_movements').select('*').order('created_at',{ascending:false}).limit(5000);
