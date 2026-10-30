@@ -688,6 +688,61 @@
   #side .sidecard{overflow:hidden!important;overflow-wrap:anywhere!important}
 }
 
+
+/* Definitive drawer reset: remove conflicting legacy rules and keep nav items inside */
+@media screen and (max-width:1100px){
+  #side.side{
+    width:min(292px,84vw)!important;max-width:84vw!important;
+    padding:calc(14px + env(safe-area-inset-top)) 12px calc(16px + env(safe-area-inset-bottom))!important;
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    gap:12px!important;overflow-x:hidden!important;overflow-y:auto!important;
+    box-sizing:border-box!important;
+  }
+  #side.side.open:before{content:none!important;display:none!important}
+  #side .brand{position:relative!important;inset:auto!important;display:flex!important;width:100%!important;min-width:0!important;box-sizing:border-box!important;padding:8px 5px 13px!important;gap:10px!important}
+  #side .brand>div:last-child{flex:1 1 auto!important;min-width:0!important}
+  #side .label{display:block!important;width:100%!important;box-sizing:border-box!important;margin:4px 0 -6px!important;padding:0 8px!important;white-space:nowrap!important;font-size:9px!important;letter-spacing:1.2px!important}
+  #side nav.nav{
+    display:flex!important;flex:0 0 auto!important;flex-direction:column!important;
+    align-items:stretch!important;gap:4px!important;width:100%!important;min-width:0!important;
+    margin:0!important;padding:0!important;box-sizing:border-box!important;overflow:visible!important;
+  }
+  #side nav.nav button{
+    appearance:none!important;-webkit-appearance:none!important;
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:10px!important;
+    position:relative!important;float:none!important;clear:both!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    min-height:43px!important;height:auto!important;box-sizing:border-box!important;
+    margin:0!important;padding:9px 10px!important;
+    border:0!important;outline:0!important;border-radius:10px!important;
+    box-shadow:none!important;background:transparent!important;
+    color:#656579!important;text-align:left!important;
+    font:600 12px/1.4 Manrope, sans-serif!important;
+    white-space:normal!important;overflow:visible!important;
+    overflow-wrap:break-word!important;word-break:normal!important;
+  }
+  #side nav.nav button:before,#side nav.nav button:after{content:none!important;display:none!important}
+  #side nav.nav button span{
+    display:flex!important;position:static!important;flex:0 0 25px!important;
+    align-items:center!important;justify-content:center!important;
+    width:25px!important;min-width:25px!important;max-width:25px!important;
+    height:25px!important;margin:0!important;padding:0!important;
+    background:transparent!important;border:0!important;box-shadow:none!important;
+    font-size:16px!important;line-height:1!important;
+  }
+  #side nav.nav button.active{background:#f0edff!important;color:#6043d8!important}
+  #side nav.nav button:hover{background:#f7f5ff!important}
+  #side .sidecard{
+    display:block!important;position:relative!important;flex:0 0 auto!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    box-sizing:border-box!important;margin:6px 0 0!important;padding:11px!important;
+    border:1px solid #eeebff!important;border-radius:12px!important;
+    background:#f8f7ff!important;overflow-wrap:anywhere!important;
+    font-size:10px!important;line-height:1.5!important;
+  }
+}
+
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
