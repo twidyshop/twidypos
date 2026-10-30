@@ -942,6 +942,39 @@
   #view-transaksi .table tbody tr.tx-detail-row .tx-price{grid-area:price!important;color:#777!important;min-width:0!important;overflow-wrap:anywhere!important}
   #view-transaksi .table tbody tr.tx-detail-row .tx-subtotal{grid-area:subtotal!important;text-align:right!important;min-width:0!important;overflow-wrap:anywhere!important;font-weight:700!important}
 }
+
+/* Final mobile alignment correction: no right-floating values or controls */
+@media screen and (max-width:1100px){
+  #view-transaksi .table tbody tr.tx-main-row td{
+    grid-template-columns:64px minmax(0,1fr)!important;
+    justify-items:start!important;text-align:left!important;
+  }
+  #view-transaksi .table tbody tr.tx-main-row .tx-action-cell{
+    display:grid!important;grid-template-columns:64px minmax(0,1fr)!important;
+    justify-content:initial!important;justify-items:start!important;align-items:center!important;
+  }
+  #view-transaksi .table tbody tr.tx-main-row .tx-action-cell:before{
+    margin:0!important;justify-self:start!important;text-align:left!important;
+  }
+  #view-transaksi .table tbody tr.tx-main-row .tx-action-cell button{
+    justify-self:start!important;margin:0!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row .tx-detail-item{
+    display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+    justify-content:flex-start!important;gap:4px!important;text-align:left!important;
+    padding:9px 2px!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row .tx-product-name,
+  #view-transaksi .table tbody tr.tx-detail-row .tx-qty,
+  #view-transaksi .table tbody tr.tx-detail-row .tx-price,
+  #view-transaksi .table tbody tr.tx-detail-row .tx-subtotal{
+    display:block!important;grid-area:auto!important;width:100%!important;
+    min-width:0!important;text-align:left!important;white-space:normal!important;
+    overflow-wrap:anywhere!important;justify-self:start!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row .tx-qty{font-weight:600!important;color:#555!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-subtotal{font-weight:700!important;color:var(--ink)!important}
+}
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
