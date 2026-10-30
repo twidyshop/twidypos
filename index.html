@@ -1008,6 +1008,44 @@
     font-size:12px!important;color:var(--ink)!important;font-weight:800!important;
   }
 }
+
+/* Definitive mobile fix: detail card must not inherit the old two-column span layout */
+@media screen and (max-width:1100px){
+  #view-transaksi .table tbody tr.tx-detail-row{
+    display:block!important;position:relative!important;left:auto!important;right:auto!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    box-sizing:border-box!important;overflow:visible!important;padding:0!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row>td[colspan="7"]{
+    display:block!important;position:static!important;width:100%!important;max-width:100%!important;
+    min-width:0!important;box-sizing:border-box!important;overflow:visible!important;
+    padding:8px 10px!important;margin:0!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row>td[colspan="7"]>.tx-detail-head{display:none!important}
+  #view-transaksi .table tbody tr.tx-detail-row>td[colspan="7"]>.tx-detail-item{
+    display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+    grid-template-areas:"name" "qty" "price" "subtotal"!important;
+    justify-items:start!important;align-items:start!important;justify-content:start!important;
+    gap:4px!important;width:100%!important;max-width:100%!important;min-width:0!important;
+    box-sizing:border-box!important;overflow:visible!important;padding:10px 0!important;
+    margin:0!important;text-align:left!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row>td[colspan="7"]>.tx-detail-item>*{
+    grid-column:1!important;display:block!important;position:static!important;
+    float:none!important;clear:both!important;justify-self:start!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    box-sizing:border-box!important;margin:0!important;padding:0!important;
+    text-align:left!important;white-space:normal!important;overflow:visible!important;
+    overflow-wrap:anywhere!important;word-break:break-word!important;
+  }
+  #view-transaksi .table tbody tr.tx-detail-row .tx-product-name{grid-area:name!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-qty{grid-area:qty!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-price{grid-area:price!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-subtotal{grid-area:subtotal!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-qty,
+  #view-transaksi .table tbody tr.tx-detail-row .tx-price{font-size:11px!important;color:#555!important}
+  #view-transaksi .table tbody tr.tx-detail-row .tx-subtotal{font-size:12px!important;font-weight:800!important;color:var(--ink)!important}
+}
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
