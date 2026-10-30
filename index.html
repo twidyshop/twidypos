@@ -293,7 +293,149 @@
 .comparison-foot{font-size:10px;line-height:1.5;color:#85899a;margin-top:7px}
 .comparison-note{font-size:10px;color:#85899a;line-height:1.6;margin:13px 0 0}
 
-.pin-input{-webkit-text-security:disc!important;text-security:disc!important}\n</style><link rel="stylesheet" href="/landing-premium.css">
+.pin-input{-webkit-text-security:disc!important;text-security:disc!important}\n
+/* Premium mobile layout: compact app bar, fluid controls and readable tables */
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .main,.content,.view,.panel,.panelhead,.tablewrap{min-width:0;max-width:100%}
+  .top{
+    position:sticky;top:0;z-index:40;
+    display:flex!important;flex-wrap:nowrap!important;align-items:center;
+    min-height:62px!important;height:auto!important;padding:9px 12px!important;gap:10px!important;
+    background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px);
+    border-bottom:1px solid #eceaf4;box-shadow:0 5px 22px #211b4610;
+  }
+  .top>div:first-child{display:flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important}
+  .top>div:first-child>div{display:none!important}
+  .mobilemenu{
+    display:grid!important;place-items:center;width:40px!important;height:40px!important;
+    border-radius:13px!important;background:linear-gradient(145deg,#f1edff,#e8e2ff)!important;
+    color:#6245d7!important;border:1px solid #e4ddff!important;font-size:18px!important;
+    box-shadow:0 3px 10px #7658ef17;
+  }
+  .topright{
+    display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0;
+    justify-content:flex-end!important;align-items:center!important;gap:7px!important;
+    padding:0!important;margin:0!important;
+  }
+  .topright #todayDate,.topright #exportBtn{display:none!important}
+  .topright #activeCashierLabel{
+    display:inline-flex!important;max-width:min(42vw,150px)!important;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    border:1px solid #e9e4ff!important;border-radius:10px!important;
+    background:#f7f5ff!important;color:#5e48bd!important;font-size:10px!important;
+    padding:8px 9px!important;
+  }
+  .topright #switchCashierBtn{
+    display:inline-flex!important;width:36px!important;height:36px!important;flex:0 0 36px;
+    align-items:center;justify-content:center;padding:0!important;border-radius:11px!important;
+    background:#f6f4ff!important;color:#6349d5!important;border:1px solid #ebe7fb!important;
+  }
+  .topright .logoutbtn{
+    min-height:36px!important;padding:8px 10px!important;font-size:10px!important;
+    border-radius:11px!important;white-space:nowrap;
+  }
+  .topright .avatar{width:36px!important;height:36px!important;flex:0 0 36px;border-radius:12px!important}
+  .content{padding:14px 11px calc(104px + env(safe-area-inset-bottom))!important}
+  .sectionhead{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    align-items:stretch!important;gap:8px!important;margin-bottom:13px!important;
+  }
+  .sectionhead>div:first-child{grid-column:1/-1;min-width:0}
+  .sectionhead h2{font-size:18px!important;line-height:1.25!important;margin-bottom:4px!important}
+  .sectionhead p{font-size:10px!important;line-height:1.45!important}
+  .sectionhead>.btn,.sectionhead>.reporttools{
+    width:100%;min-width:0;min-height:38px;padding:9px 7px!important;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-size:10px!important;line-height:1.25!important;white-space:normal;
+    border-radius:10px!important;
+  }
+  #view-produk .sectionhead #importProductsBtn,
+  #view-produk .sectionhead #downloadTemplateBtn{grid-row:2}
+  #view-produk .sectionhead #addProductBtn{grid-column:1/-1;grid-row:3}
+  #view-produk .panelhead{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;padding:10px!important;
+  }
+  #view-produk .panelhead>.search{grid-column:1/-1;width:100%;min-width:0}
+  #view-produk .panelhead select{width:100%;min-width:0;padding:10px 7px!important;font-size:12px!important}
+  #view-produk .panelhead #productsExcel{grid-column:1/-1;width:100%;min-height:37px;padding:8px!important;font-size:10px!important}
+  #view-produk .panel>div[style*="padding:12px 16px"]{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px 10px!important;padding:10px 12px!important;font-size:10px;
+  }
+  #view-produk .panel>div[style*="padding:12px 16px"] span:last-child{grid-column:1/-1}
+  .bulkbar{padding:9px 10px!important;gap:7px!important}
+  .bulkbar strong{font-size:10px!important;flex:1 1 100%;margin:0!important}
+  .bulkbar label{font-size:10px}
+  .bulkbar .btn{font-size:9px!important;padding:8px 9px!important}
+  .tablewrap{overflow:visible!important}
+  .table{width:100%!important;table-layout:fixed!important;white-space:normal!important}
+  .table th{font-size:8px!important;letter-spacing:0!important;padding:8px 4px!important;overflow-wrap:anywhere}
+  .table td{font-size:10px!important;padding:9px 4px!important;overflow-wrap:anywhere;vertical-align:middle}
+  .table td b{font-size:10px!important}
+  #view-produk .table th:nth-child(4),#view-produk .table td:nth-child(4),
+  #view-produk .table th:nth-child(7),#view-produk .table td:nth-child(7),
+  #view-produk .table th:nth-child(8),#view-produk .table td:nth-child(8){display:none}
+  #view-produk .table th:nth-child(1),#view-produk .table td:nth-child(1){width:7%;text-align:center}
+  #view-produk .table th:nth-child(2),#view-produk .table td:nth-child(2){width:34%}
+  #view-produk .table th:nth-child(3),#view-produk .table td:nth-child(3){display:none}
+  #view-produk .table th:nth-child(5),#view-produk .table td:nth-child(5){width:22%}
+  #view-produk .table th:nth-child(6),#view-produk .table td:nth-child(6){width:12%;text-align:center}
+  #view-produk .table th:nth-child(9),#view-produk .table td:nth-child(9){width:12%;text-align:center}
+  #view-produk .table th:nth-child(10),#view-produk .table td:nth-child(10){width:13%}
+  #view-produk .productthumb{width:27px!important;height:27px!important;border-radius:8px!important}
+  #view-produk .productthumb img{width:100%;height:100%;object-fit:cover}
+  #view-produk .actions{display:grid!important;gap:4px!important}
+  #view-produk .smallbtn{font-size:9px!important;padding:6px 5px!important}
+  #view-transaksi .sectionhead>.btn{min-height:36px}
+  #view-transaksi .panelhead,#view-stoklog .panelhead{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    padding:10px!important;gap:9px!important;
+  }
+  #view-transaksi .panelhead>.search{width:100%;min-width:0}
+  #view-transaksi .rangefilters,#view-stoklog .rangefilters{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;width:100%;
+  }
+  .rangefilters label{min-width:0;font-size:9px!important}
+  .rangefilters input{width:100%;min-width:0;padding:9px 6px!important;font-size:12px!important}
+  .rangefilters button{grid-column:1/-1;width:100%;font-size:10px!important;padding:8px!important}
+  #view-transaksi .table th:nth-child(3),#view-transaksi .table td:nth-child(3),
+  #view-transaksi .table th:nth-child(4),#view-transaksi .table td:nth-child(4),
+  #view-transaksi .table th:nth-child(5),#view-transaksi .table td:nth-child(5){display:none}
+  #view-transaksi .table th:nth-child(1),#view-transaksi .table td:nth-child(1){width:34%}
+  #view-transaksi .table th:nth-child(2),#view-transaksi .table td:nth-child(2){width:31%}
+  #view-transaksi .table th:nth-child(6),#view-transaksi .table td:nth-child(6){width:22%}
+  #view-transaksi .table th:nth-child(7),#view-transaksi .table td:nth-child(7){width:13%}
+  #view-stoklog .table th:nth-child(2),#view-stoklog .table td:nth-child(2),
+  #view-stoklog .table th:nth-child(4),#view-stoklog .table td:nth-child(4),
+  #view-stoklog .table th:nth-child(7),#view-stoklog .table td:nth-child(7),
+  #view-stoklog .table th:nth-child(8),#view-stoklog .table td:nth-child(8){display:none}
+  #view-stoklog .table th,#view-stoklog .table td{font-size:9px!important;padding:8px 5px!important}
+  #view-pelanggan .table th:nth-child(3),#view-pelanggan .table td:nth-child(3),
+  #view-pelanggan .table th:nth-child(4),#view-pelanggan .table td:nth-child(4){display:none}
+  #view-pelanggan .table th,#view-pelanggan .table td{padding:9px 5px!important}
+  #view-laporan .reporttools,.reporttools{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px!important;width:100%}
+  .reporttools .btn{width:100%;min-width:0;padding:9px 6px!important;font-size:10px!important}
+  .panel{border-radius:13px!important}
+  .panelhead{gap:8px!important}
+  .panelbody{padding:12px!important}
+  .formgrid,.settings{grid-template-columns:minmax(0,1fr)!important}
+  .modalback{padding:10px!important}
+  .modal{max-height:calc(100dvh - 20px)!important}
+  .toast{left:12px!important;right:12px!important;bottom:calc(92px + env(safe-area-inset-bottom))!important;text-align:center}
+}
+@media(max-width:390px){
+  .topright{gap:5px!important}
+  .topright #activeCashierLabel{max-width:34vw!important;font-size:9px!important;padding:7px!important}
+  .topright .logoutbtn{font-size:9px!important;padding:7px 8px!important}
+  #view-produk .table th,#view-produk .table td{padding-left:3px!important;padding-right:3px!important}
+  #view-produk .table th:nth-child(2),#view-produk .table td:nth-child(2){width:32%}
+  #view-produk .table th:nth-child(5),#view-produk .table td:nth-child(5){width:24%}
+}
+
+</style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
 <section class="lhero"><div><span class="lpill">✦ APLIKASI KASIR PRAKTIS UNTUK USAHA</span><h1>Jalankan tokomu lebih <em>rapi</em>, setiap hari.</h1><p>Catat penjualan, kelola produk dan stok, pantau riwayat transaksi, serta lihat laporan usaha dalam satu dashboard yang simpel.</p><div class="lheroBtns"><button class="lbtn primary" type="button" data-open-auth>Mulai Gratis&nbsp; →</button><a class="lbtn" href="#fitur">Kenali Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a></div><div class="ltrust"><span>Kasir & transaksi</span><span>Stok produk</span><span>Laporan penjualan</span></div></div>
