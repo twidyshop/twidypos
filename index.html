@@ -663,6 +663,31 @@
   #side .sidecard strong{display:inline-block;max-width:100%!important;white-space:normal!important}
 }
 
+
+/* Sidebar labels: fixed icon column and shrinkable text column */
+@media screen and (max-width:1100px){
+  #side .nav{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:3px!important;width:100%!important;overflow:visible!important}
+  #side .nav button{
+    display:grid!important;grid-template-columns:25px minmax(0,1fr)!important;
+    align-items:center!important;column-gap:9px!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    height:auto!important;min-height:42px!important;box-sizing:border-box!important;
+    padding:9px 10px!important;margin:0!important;border:1px solid transparent!important;
+    border-radius:10px!important;text-align:left!important;
+    white-space:normal!important;overflow:hidden!important;
+    overflow-wrap:anywhere!important;word-break:normal!important;
+    font-size:12px!important;line-height:1.35!important;
+  }
+  #side .nav button span{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    grid-column:1!important;grid-row:1!important;
+    width:25px!important;min-width:25px!important;max-width:25px!important;
+    margin:0!important;padding:0!important;font-size:16px!important;line-height:1!important;
+  }
+  #side .label{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #side .sidecard{overflow:hidden!important;overflow-wrap:anywhere!important}
+}
+
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
