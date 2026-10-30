@@ -743,6 +743,128 @@
   }
 }
 
+
+/* Mobile refinement: compact actions, filters and readable table cards */
+@media screen and (max-width:1100px){
+  /* Keep the three product actions on one compact row */
+  #view-produk .sectionhead{
+    display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;align-items:stretch!important;
+  }
+  #view-produk .sectionhead>div:first-child{grid-column:1/-1!important}
+  #view-produk .sectionhead #importProductsBtn,
+  #view-produk .sectionhead #downloadTemplateBtn,
+  #view-produk .sectionhead #addProductBtn{
+    grid-column:auto!important;grid-row:auto!important;width:100%!important;
+    min-width:0!important;padding:8px 3px!important;font-size:9px!important;
+    white-space:normal!important;overflow-wrap:anywhere!important;min-height:36px!important;
+  }
+  /* Transaction export actions in one row */
+  #view-transaksi .sectionhead{
+    display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;
+  }
+  #view-transaksi .sectionhead>div:first-child{grid-column:1/-1!important}
+  #view-transaksi .sectionhead>.btn{
+    width:100%!important;min-width:0!important;padding:8px 3px!important;
+    font-size:9px!important;white-space:normal!important;min-height:35px!important;
+  }
+  #view-transaksi .panelhead{
+    display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+    gap:8px!important;padding:10px!important;
+  }
+  #view-transaksi .panelhead>.search{width:100%!important;min-width:0!important}
+  #view-transaksi .rangefilters{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;width:100%!important;align-items:end!important;
+  }
+  #view-transaksi .rangefilters label{display:block!important;min-width:0!important;font-size:10px!important}
+  #view-transaksi .rangefilters input{width:100%!important;min-width:0!important;font-size:11px!important;padding:8px 5px!important}
+  #view-transaksi .rangefilters button{grid-column:1/-1!important;width:100%!important}
+  /* Use compact stacked cards instead of a horizontally scrolling table */
+  #view-transaksi .tablewrap,#view-pelanggan .tablewrap,#view-stoklog .tablewrap,#view-retur .tablewrap{
+    overflow:visible!important;padding:7px!important;
+  }
+  #view-transaksi .table,#view-pelanggan .table,#view-stoklog .table,#view-retur .table{
+    display:block!important;width:100%!important;table-layout:auto!important;border-collapse:separate!important;
+    border-spacing:0!important;white-space:normal!important;
+  }
+  #view-transaksi .table thead,#view-pelanggan .table thead,#view-stoklog .table thead,#view-retur .table thead{
+    display:none!important;
+  }
+  #view-transaksi .table tbody,#view-pelanggan .table tbody,#view-stoklog .table tbody,#view-retur .table tbody{
+    display:block!important;width:100%!important;
+  }
+  #view-transaksi .table tbody tr,#view-pelanggan .table tbody tr,#view-stoklog .table tbody tr,#view-retur .table tbody tr{
+    display:block!important;width:100%!important;margin:0 0 10px!important;padding:8px!important;
+    border:1px solid var(--line)!important;border-radius:12px!important;background:#fff!important;
+    overflow:hidden!important;
+  }
+  #view-transaksi .table tbody td,#view-pelanggan .table tbody td,#view-stoklog .table tbody td,#view-retur .table tbody td{
+    display:grid!important;grid-template-columns:minmax(82px,34%) minmax(0,1fr)!important;
+    gap:7px!important;width:100%!important;min-width:0!important;padding:6px 2px!important;
+    border:0!important;border-bottom:1px solid #f0eff5!important;text-align:left!important;
+    font-size:10px!important;line-height:1.4!important;overflow-wrap:anywhere!important;
+  }
+  #view-transaksi .table tbody td:last-child,#view-pelanggan .table tbody td:last-child,
+  #view-stoklog .table tbody td:last-child,#view-retur .table tbody td:last-child{border-bottom:0!important}
+  #view-transaksi .table tbody td:before,#view-pelanggan .table tbody td:before,
+  #view-stoklog .table tbody td:before,#view-retur .table tbody td:before{
+    color:var(--muted)!important;font-size:9px!important;font-weight:800!important;
+    letter-spacing:.1px!important;content:""!important;
+  }
+  /* Transaction list: all seven fields remain visible; item detail is its own full-width block */
+  #view-transaksi .table tbody tr td:nth-child(1):before{content:"NO. TRANSAKSI"!important}
+  #view-transaksi .table tbody tr td:nth-child(2):before{content:"TANGGAL"!important}
+  #view-transaksi .table tbody tr td:nth-child(3):before{content:"ITEM"!important}
+  #view-transaksi .table tbody tr td:nth-child(4):before{content:"METODE"!important}
+  #view-transaksi .table tbody tr td:nth-child(5):before{content:"KASIR"!important}
+  #view-transaksi .table tbody tr td:nth-child(6):before{content:"TOTAL"!important}
+  #view-transaksi .table tbody tr td:nth-child(7):before{content:"AKSI"!important}
+  #view-transaksi .table tbody tr td[colspan]{display:block!important;padding:9px!important;background:#faf9ff!important}
+  #view-transaksi .table tbody tr td[colspan]:before{display:none!important}
+  #view-transaksi .table tbody tr td[colspan] div{grid-template-columns:minmax(0,1fr) auto!important;gap:5px!important}
+  #view-transaksi .table tbody tr td[colspan] div span:nth-child(3){display:none!important}
+  #view-transaksi .table tbody tr td[colspan] div span:nth-child(4){text-align:right!important}
+  /* Customer database */
+  #view-pelanggan .table tbody tr td:nth-child(1):before{content:"NAMA"!important}
+  #view-pelanggan .table tbody tr td:nth-child(2):before{content:"TELEPON"!important}
+  #view-pelanggan .table tbody tr td:nth-child(3):before{content:"EMAIL"!important}
+  #view-pelanggan .table tbody tr td:nth-child(4):before{content:"CATATAN"!important}
+  #view-pelanggan .table tbody tr td:nth-child(5):before{content:"AKSI"!important}
+  /* Stock movement history */
+  #view-stoklog .table tbody tr td:nth-child(1):before{content:"TANGGAL"!important}
+  #view-stoklog .table tbody tr td:nth-child(2):before{content:"PRODUK / SKU"!important}
+  #view-stoklog .table tbody tr td:nth-child(3):before{content:"JENIS"!important}
+  #view-stoklog .table tbody tr td:nth-child(4):before{content:"STOK AWAL"!important}
+  #view-stoklog .table tbody tr td:nth-child(5):before{content:"PERUBAHAN"!important}
+  #view-stoklog .table tbody tr td:nth-child(6):before{content:"STOK AKHIR"!important}
+  #view-stoklog .table tbody tr td:nth-child(7):before{content:"KASIR / ALASAN"!important}
+  #view-stoklog .table tbody tr td:nth-child(8):before{content:"REFERENSI"!important}
+  /* Returns report */
+  #view-retur .welcome{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important}
+  #view-retur .welcome>.btn{width:100%!important;min-width:0!important}
+  #view-retur .panelbody .formgrid{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;
+  }
+  #view-retur .panelbody .formgrid .group{min-width:0!important;gap:4px!important}
+  #view-retur .panelbody .formgrid .group:nth-child(3){grid-column:1/-1!important}
+  #view-retur .panelbody .formgrid .field{width:100%!important;min-width:0!important;padding:9px 7px!important;font-size:11px!important}
+  #view-retur #clearReturnFilters{width:100%!important;min-width:0!important;padding:8px!important;font-size:10px!important}
+  #view-retur .table tbody tr td:nth-child(1):before{content:"TANGGAL"!important}
+  #view-retur .table tbody tr td:nth-child(2):before{content:"ID TRANSAKSI"!important}
+  #view-retur .table tbody tr td:nth-child(3):before{content:"BARANG & QTY"!important}
+  #view-retur .table tbody tr td:nth-child(4):before{content:"ALASAN"!important}
+  #view-retur .table tbody tr td:nth-child(5):before{content:"NILAI RETUR"!important}
+  #view-retur .table tbody tr td:nth-child(6):before{content:"METODE BAYAR"!important}
+  #view-retur .table tbody tr td:nth-child(7):before{content:"DIPROSES OLEH"!important}
+  #view-retur .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+}
+@media screen and (max-width:390px){
+  #view-produk .sectionhead #importProductsBtn,
+  #view-produk .sectionhead #downloadTemplateBtn,
+  #view-produk .sectionhead #addProductBtn{font-size:8px!important;padding-left:2px!important;padding-right:2px!important}
+  #view-transaksi .sectionhead>.btn{font-size:8px!important}
+}
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
