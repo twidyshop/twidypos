@@ -865,6 +865,39 @@
   #view-produk .sectionhead #addProductBtn{font-size:8px!important;padding-left:2px!important;padding-right:2px!important}
   #view-transaksi .sectionhead>.btn{font-size:8px!important}
 }
+
+/* Transaction history: tighten card alignment and prevent detail columns clipping */
+@media screen and (max-width:1100px){
+  #view-transaksi .tablewrap{padding:5px!important;overflow:visible!important}
+  #view-transaksi .table{width:100%!important;max-width:100%!important;margin:0!important}
+  #view-transaksi .table tbody tr{
+    box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+    margin:0 0 8px!important;padding:7px!important;
+  }
+  #view-transaksi .table tbody tr:not(:has(td[colspan])) td{
+    box-sizing:border-box!important;grid-template-columns:minmax(68px,27%) minmax(0,1fr)!important;
+    gap:5px!important;padding:5px 1px!important;font-size:10px!important;
+  }
+  #view-transaksi .table tbody tr:not(:has(td[colspan])) td:before{
+    font-size:8px!important;letter-spacing:0!important;white-space:normal!important;
+  }
+  #view-transaksi .table tbody tr:not(:has(td[colspan])) td:nth-child(1),
+  #view-transaksi .table tbody tr:not(:has(td[colspan])) td:nth-child(2){overflow-wrap:anywhere!important}
+  #view-transaksi .table tbody tr td[colspan]{
+    box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+    padding:7px!important;margin:0!important;overflow:hidden!important;border-radius:8px!important;
+  }
+  #view-transaksi .table tbody tr td[colspan]>div{
+    box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+    grid-template-columns:minmax(0,1fr) auto!important;gap:4px 8px!important;
+    padding:4px 0!important;white-space:normal!important;
+  }
+  #view-transaksi .table tbody tr td[colspan]>div>span:nth-child(1){min-width:0!important;overflow-wrap:anywhere!important}
+  #view-transaksi .table tbody tr td[colspan]>div>span:nth-child(2){white-space:nowrap!important;text-align:right!important}
+  #view-transaksi .table tbody tr td[colspan]>div>span:nth-child(3),
+  #view-transaksi .table tbody tr td[colspan]>div>span:nth-child(4){display:block!important;font-size:9px!important;min-width:0!important;overflow-wrap:anywhere!important}
+  #view-transaksi .table tbody tr td[colspan]>div>span:nth-child(4){text-align:right!important}
+}
 </style><link rel="stylesheet" href="/landing-premium.css">
 </head><body><main id="landingPage" class="landing" style="display:none">
 <header class="lnav"><a class="lbrand" href="#" style="text-decoration:none;color:inherit"><span style="width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#9a86ff,#6849e6);color:white;font:800 24px Manrope">t</span>twidy<span>pos</span></a><nav class="lactions"><a class="lbtn" href="#fitur">Lihat Fitur</a><a class="lbtn" href="/paket">Paket &amp; Harga</a><button class="lbtn primary" type="button" data-open-auth>Masuk / Daftar</button></nav></header>
