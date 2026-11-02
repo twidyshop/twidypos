@@ -1,8 +1,8 @@
 # Konfigurasi paket dan Midtrans TWIDYPOS
 
 ## Paket
-- Free: maksimal 50 transaksi per hari dan 50 produk.
-- Premium: Rp15.000 sekali bayar untuk akses lifetime, maksimal 500 transaksi per hari dan 200 produk.
+- Free: maksimal 50 transaksi per hari dan 100 produk.
+- Premium: Rp15.000 sekali bayar untuk akses lifetime, maksimal 500 transaksi per hari dan 500 produk.
 - Full Unlimited: Rp25.000 sekali bayar untuk akses lifetime, tanpa batas produk/transaksi.
 - Tidak ada masa kedaluwarsa paket berbayar dan tidak ada perpanjangan otomatis. Pembelian satu kali memberi akses lifetime.
 - Akun yang dibuat sebelum waktu rollout yang dicatat di `private.twidypos_plan_rollout` tetap unlimited.
