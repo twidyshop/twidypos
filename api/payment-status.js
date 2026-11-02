@@ -52,7 +52,6 @@ module.exports = async (req, res) => {
             (m.transaction_status === 'settlement' ||
               (m.transaction_status === 'capture' && m.fraud_status === 'accept'));
           if (validAmount && validCurrency && paid && m.transaction_id) {
-            const paidAt = m.settlement_time || m.transaction_time || null;
             // Existing DB RPC performs the final order/expiry checks and
             // atomically records the payment and lifetime entitlement.
             await fetch(e.url + '/rest/v1/rpc/twidypos_activate_paid_order', {
